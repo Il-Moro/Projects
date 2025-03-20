@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "convert.h"
+#include "dec_bin.h"
+#include "bin_dec.h"
 
 // Funzione principale
 int main(){

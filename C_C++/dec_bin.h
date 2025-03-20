@@ -5,6 +5,7 @@
 
 // definizione funzioni
 void dec_bin();
+void bin_dec();
 int potenzaDiDue(int esponente);
 int* conversione_intera(int* arr_int, int *lenght_int, int intera);
 int* conversione_decimale(int* arr_dec, int *lenght_dec, float decimale);
@@ -35,6 +36,9 @@ void dec_bin(){
     int esponente_vero; // l'esponente corretto nella rappresentazione in virgola mobile standardizzata
     int esponente_calcolatore; // l'esponente che deve essere applicato al calcolatore (e* = e + bias)
     // dove e* è l'esponente nel calcolatore ed 'e' è l'esponente vero nella rappresentazione fl.p.
+    arr_int = (int*)malloc(sizeof(int)*lenght_int);
+    arr_esp = (int*)malloc(sizeof(int)*lenght_esp);
+    arr_dec = (int*)malloc(sizeof(int)*lenght_dec);
 
 
     printf("Type number of exp: "); 
@@ -43,7 +47,7 @@ void dec_bin(){
     scanf("%d", &mantissa);
     
 
-    while (decisione == 1){
+while (decisione == 1){
 
         printf("Type decimal number: ");
         scanf("%f", &num);
@@ -235,10 +239,9 @@ void dec_bin(){
         printf("\n");
 
         printf("\n\nType 1 to use this exp & mantissa or type 2");
-        printf("     |---------------->  ");
+        printf("     |---------------->   ");
         scanf("%d", &decisione);  
-    }
-    
+    }    
 }
 
 
@@ -263,27 +266,26 @@ int* conversione_intera(int * arr_int, int* lenght, int intera){
     if (intera > 0){ // controllo se intera > 0 per la prima malloc su arr_int
         arr_int = (int*)malloc(sizeof(int)*1); 
         *lenght = *lenght+1; //setto la nuova lunghezza per l'array della parte intera 
-    }
-
-    do{ 
-        if(intera%2 == 0){ 
-            arr_int[*lenght-1] = 0;
-        }
-        else{
-            arr_int[*lenght-1] = 1;
-        }
-        intera = intera/2;
-
-
-        if(intera>0){
-            *lenght = *lenght+1;
-            arr_int = (int*) realloc(arr_int, (*lenght)*sizeof(int));
-            if (arr_int == NULL){
-                printf("Errore nella reallocarray (funzione parte_intera())\n");
-                return NULL;
+        do{ 
+            if(intera%2 == 0){ 
+                arr_int[*lenght-1] = 0;
             }
-        }
-    } while (intera > 0);
+            else{
+                arr_int[*lenght-1] = 1;
+            }
+            intera = intera/2;
+    
+    
+            if(intera>0){
+                *lenght = *lenght+1;
+                arr_int = (int*) realloc(arr_int, (*lenght)*sizeof(int));
+                if (arr_int == NULL){
+                    printf("Errore nella reallocarray (funzione parte_intera())\n");
+                    return NULL;
+                }
+            }
+        } while (intera > 0);
+    }    
     return arr_int;
 }
 
